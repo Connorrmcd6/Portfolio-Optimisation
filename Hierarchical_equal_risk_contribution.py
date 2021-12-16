@@ -13,12 +13,12 @@ Y = df.pct_change()
 Y = Y.iloc[1:, :]
 
 port = rp.HCPortfolio(returns=Y)
-model='HRP' 
+model='HERC' 
 codependence = 'pearson' 
 rm = 'MV'
 rf = 0 
 linkage = 'ward' 
-max_k = 10 
+max_k = 15 
 leaf_order = True 
 
 w = port.optimization(model=model,
@@ -30,7 +30,6 @@ w = port.optimization(model=model,
                       leaf_order=leaf_order)
 
 portfolio_weights = w
-
 
 weg = round(portfolio_weights['weights'],4)
 
@@ -44,6 +43,7 @@ for i in range(len(portfolio_weights.index)):
     
 ret = round(100*(ret-1)/1, 2)
 ret_tr = round((ret/len(df.index))*252,2)
+
 
 df = yf.download(tickers_list, test_start, test_stop)['Adj Close']
 
