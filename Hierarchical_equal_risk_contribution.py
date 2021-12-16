@@ -31,6 +31,11 @@ w = port.optimization(model=model,
 
 portfolio_weights = w
 
+for i in range(len(portfolio_weights.index)):
+    v = round(portfolio_weights.weights[i],4)
+    if v > 0:
+        print(f"{portfolio_weights.index[i]}: {100*v}%\n")
+
 weg = round(portfolio_weights['weights'],4)
 
 ret = 0
