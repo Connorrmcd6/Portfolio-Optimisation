@@ -8,6 +8,7 @@ from configs import tickers_list, train_start, train_stop, test_start, test_stop
 
 df = yf.download(tickers_list, train_start, train_stop)['Adj Close']
 df = df.dropna()
+st = df.index[0]
 
 returns = df/df.shift(1)
 returns = returns.iloc[1:,:]
@@ -70,5 +71,6 @@ for i in range(len(portfolio_weights.index)):
     
 ret = round(100*(ret-1)/1, 2)
 print('')
-print (f"Return For Test Period: {ret}%")
+print(f'Training Period: {st} - {train_stop}')
+print (f"Return For Test Period ({test_start} to {test_stop}):   {ret}%")
 print('')
